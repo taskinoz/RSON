@@ -1,0 +1,15 @@
+{
+    "playlists": {
+        "version": "stable",
+        "versionNum": 3284,
+        "Gamemodes": {
+            "defaults": {
+                "vars": {
+                    "pve_menu": 0,
+                    "enable_emotes": 0,
+                    "boost_store_mode": "off"
+                }
+            }
+        }
+    }
+}
