@@ -3,6 +3,8 @@ const playlist = fs.readFileSync('./playlist.txt', 'utf-8')
 const testRSON = fs.readFileSync('./testRson.txt', 'utf-8')
 const testRSONComment = fs.readFileSync('./testRsonComment.txt', 'utf-8')
 
+const Titanfall2Playlist = 'https://r2-pc.s3.amazonaws.com/playlists_v2.txt';
+
 function encodeRSON(obj, indent = '') {
     let rson = '';
 
