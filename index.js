@@ -58,9 +58,12 @@ function parseRSON(text) {
 
 function stripComments(text) {
     return text.split('\n').map(line => {
-        const commentIndex = line.indexOf('//');
-        if (commentIndex !== -1) {
-            return line.substring(0, commentIndex).trim();
+        let inQuotes = false;
+        for (let i = 0; i < line.length - 1; i++) {
+            if (line[i] === '"') inQuotes = !inQuotes;
+            if (!inQuotes && line[i] === '/' && line[i + 1] === '/') {
+                return line.substring(0, i).trim();
+            }
         }
         return line;
     }).filter(line => line.trim() !== '').join('\n');
@@ -68,9 +71,13 @@ function stripComments(text) {
 
 function extractComments(text) {
     return text.split('\n').reduce((acc, line) => {
-        const commentIndex = line.indexOf('//');
-        if (commentIndex !== -1) {
-            acc.push(line.substring(commentIndex + 2).trim());
+        let inQuotes = false;
+        for (let i = 0; i < line.length - 1; i++) {
+            if (line[i] === '"') inQuotes = !inQuotes;
+            if (!inQuotes && line[i] === '/' && line[i + 1] === '/') {
+                acc.push(line.substring(i + 2).trim());
+                break;
+            }
         }
         return acc;
     }, []);
