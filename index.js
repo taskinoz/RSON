@@ -1,7 +1,7 @@
 const fs = require('fs')
-const playlist = fs.readFileSync('./playlist.txt', 'utf-8')
-const testRSON = fs.readFileSync('./testRson.txt', 'utf-8')
-const testRSONComment = fs.readFileSync('./testRsonComment.txt', 'utf-8')
+const playlist = fs.readFileSync('./testfiles/playlist.txt', 'utf-8')
+const testRSON = fs.readFileSync('./testfiles/testRson.txt', 'utf-8')
+const testRSONComment = fs.readFileSync('./testfiles/testRsonComment.txt', 'utf-8')
 
 const Titanfall2Playlist = 'https://r2-pc.s3.amazonaws.com/playlists_v2.txt';
 
@@ -72,5 +72,5 @@ const data = {
 // console.log(rsonText);
 
 const rsonObj = parseRSON(testRSON);
-console.log(rsonObj);
+console.log(JSON.stringify(rsonObj));
 
