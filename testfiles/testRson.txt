@@ -13,5 +13,7 @@ playlists
                                 boost_store_mode off
                         }
                 }
+                testa
+                {}
         }
 }
