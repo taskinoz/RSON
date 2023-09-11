@@ -22,7 +22,8 @@ function encodeRSON(obj, indent = '') {
 }
 
 function parseRSON(text) {
-    const lines = text.split('\n');
+    const noComments = stripComments(text);
+    const lines = noComments.split('\n');
     const stack = [];
     let currentObject = {};
     const root = currentObject;
@@ -83,32 +84,16 @@ function extractComments(text) {
     }, []);
 }
 
-const data = {
-    playlists: {
-        version: 'stable',
-        versionNum: 3284,
-        Gamemodes: {
-            defaults: {
-                vars: {
-                    pve_menu: 0,
-                    enable_emotes: 0,
-                    boost_store_mode: 'off',
-                }
-            }
-        }
-    }
-};
-
 // const rsonText = encodeRSON(data);
 // console.log(rsonText);
 
-// const rsonObj = parseRSON(playlist);
-// console.log(JSON.stringify(rsonObj));
+const rsonObj = parseRSON(playlist);
+console.log(JSON.stringify(rsonObj));
 
-// fs.writeFileSync('./testfiles/testRsonExport.txt', JSON.stringify(rsonObj, true, 2));
+fs.writeFileSync('./testfiles/testRsonExport.json', JSON.stringify(rsonObj, true, 2));
 
 // const rsonObj = parseRSON(testRSON);
 // console.log(JSON.stringify(rsonObj, true, 2));
 
-const comments = extractComments(playlist);
-console.log(comments);
+// const comments = extractComments(playlist);
+// console.log(comments);
