@@ -1,0 +1,17 @@
+{
+  "name": "rson",
+  "version": "1.0.0",
+  "description": "A parser for the Respawn Object Notation file format",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "rson",
+    "respawn",
+    "titanfall",
+    "json"
+  ],
+  "author": "Tristan Kennedy",
+  "license": "MIT"
+}
