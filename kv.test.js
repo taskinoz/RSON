@@ -4,7 +4,7 @@ const testPlaylist = fs.readFileSync('./testKV/testPlaylist.txt', 'utf-8')
 const testPlaylistComments = fs.readFileSync('./testKV/testPlaylistComment.txt', 'utf-8')
 const testJSON = JSON.parse(fs.readFileSync('./testKV/testPlaylist.json', 'utf-8'))
 
-const {RSON, KV} = require('./src/lib');
+const {KV} = require('./src/lib');
 
 const Titanfall2Playlist = 'https://r2-pc.s3.amazonaws.com/playlists_v2.txt';
 
