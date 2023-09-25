@@ -9,7 +9,8 @@
                     "enable_emotes": 0,
                     "boost_store_mode": "off"
                 }
-            }
+            },
+            "test": {}
         }
     }
 }
