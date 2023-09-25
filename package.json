@@ -1,5 +1,5 @@
 {
-  "name": "rson",
+  "name": "rspn-rson",
   "version": "1.0.0",
   "description": "A parser for the Respawn Object Notation file format",
   "main": "index.js",
