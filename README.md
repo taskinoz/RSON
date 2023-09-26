@@ -7,7 +7,9 @@ npm install rspn-rson
 ```
 
 ## Usage
-```javascript
+
+### RSON
+```js
 const { RSON } = require('rspn-rson');
 
 const rsonText = `
@@ -38,5 +40,78 @@ const rsonText = `
     xb1_offer: "8d88ac7f-af53-4df2-a846-7f1181b2c91c"
 }
 `;
+
+const parsed = RSON.parse(rsonText);
+console.log(parsed);
+```
+
+```js
+const testObj = {
+  script_const: 'ET_PREORDER',
+  pc: 'TITANFALL2_PREORDER_CONTENT',
+  ps4: 'PREORDER01000000',
+  xb1: 'Titanfall2.PreOrder',
+  pc_offer: '',
+  xb1_offer: 'b7b57115-08eb-4332-98dc-bca86566cdc8'
+};
+
+const encoded = RSON.encode(testObj);
+console.log(encoded);
+```
+
+### KV
+```js
+const { KV } = require('rspn-rson');
+
+const kvText = `
+playlists
+{
+        version stable
+        versionNum 3284
+        Gamemodes
+        {
+                defaults
+                {
+                        vars
+                        {
+                                pve_menu 0
+                                enable_emotes 0
+                                boost_store_mode off
+                        }
+                }
+                test
+                {}
+        }
+}
+`;
+
+const parsed = KV.parse(kvText);
+console.log(parsed);
+```
+
+```js
+const testObj = {
+  playlists: {
+    version: 'stable',
+    versionNum: 3284,
+    Gamemodes: {
+      defaults: {
+        vars: {
+          pve_menu: 0,
+          enable_emotes: 0,
+          boost_store_mode: 'off'
+        }
+      },
+      test: {}
+    }
+  }
+};
+
+const encoded = KV.encode(testObj);
+console.log(encoded);
+```
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 
 
