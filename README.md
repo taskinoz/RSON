@@ -1,4 +1,5 @@
 # RSON
+![Tests](https://github.com/taskinoz/RSON/actions/workflows/tests.yml/badge.svg)
 A Javascript RSON parser and encode
 
 ## Install
