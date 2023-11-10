@@ -31,8 +31,6 @@ function parse(text) {
             jsonObject += '}';
         }
 
-        console.log(jsonObject);
-
         // Parse the processed JSON string
         return JSON.parse(jsonObject);
     });
