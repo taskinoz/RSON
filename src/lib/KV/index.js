@@ -1,13 +1,19 @@
+const DEFAULT_LINE_ENDING = '\r\n';
+
+function splitLines(text) {
+    return String(text).split(/\r\n|\n|\r/);
+}
+
 function encode(obj, indent = '') {
     let rson = '';
 
     for (const [key, value] of Object.entries(obj)) {
         if (typeof value === 'object') {
-            rson += `${indent}${key}\n${indent}{\n`;
-            rson += encodeRSON(value, indent + '\t');
-            rson += `${indent}}\n`;
+            rson += `${indent}${key}${DEFAULT_LINE_ENDING}${indent}{${DEFAULT_LINE_ENDING}`;
+            rson += encode(value, indent + '\t');
+            rson += `${indent}}${DEFAULT_LINE_ENDING}`;
         } else {
-            rson += `${indent}${key} ${value}\n`;
+            rson += `${indent}${key} ${value}${DEFAULT_LINE_ENDING}`;
         }
     }
 
@@ -16,7 +22,7 @@ function encode(obj, indent = '') {
 
 function parse(text) {
     const noComments = strip(text);
-    const lines = noComments.split('\n');
+    const lines = splitLines(noComments);
     const stack = [];
     let currentObject = {};
     const root = currentObject;
@@ -51,7 +57,7 @@ function parse(text) {
 }
 
 function strip(text) {
-    return text.split('\n').map(line => {
+    return splitLines(text).map(line => {
         let inQuotes = false;
         for (let i = 0; i < line.length - 1; i++) {
             if (line[i] === '"') inQuotes = !inQuotes;
@@ -60,11 +66,11 @@ function strip(text) {
             }
         }
         return line;
-    }).filter(line => line.trim() !== '').join('\n');
+    }).filter(line => line.trim() !== '').join(DEFAULT_LINE_ENDING);
 }
 
 function comments(text) {
-    return text.split('\n').reduce((acc, line) => {
+    return splitLines(text).reduce((acc, line) => {
         let inQuotes = false;
         for (let i = 0; i < line.length - 1; i++) {
             if (line[i] === '"') inQuotes = !inQuotes;

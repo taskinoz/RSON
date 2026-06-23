@@ -1,3 +1,13 @@
+const DEFAULT_LINE_ENDING = '\r\n';
+
+function splitLines(text) {
+    return String(text).split(/\r\n|\n|\r/);
+}
+
+function normalizeLineEndings(text, lineEnding = DEFAULT_LINE_ENDING) {
+    return splitLines(text).join(lineEnding);
+}
+
 function parse(text) {
     // Remove JavaScript-style comments
     const cleanText = text.replace(/\/\/.*$/gm, '').trim();
@@ -40,13 +50,13 @@ function parse(text) {
 
 
 
-function encode(obj) {
+function encode(obj, lineEnding = DEFAULT_LINE_ENDING) {
     // Pull the opbjects from the array and convert them to strings
     const strings = obj.map(o => JSON.stringify(o, null, '\t'));
     // Join the strings together with newlines between them
     const text = strings.join('\n');
     // Remove the quotes around the keys but not the values
-    return text.replace(/"(\w+)":/g, '$1:') + '\n';
+    return normalizeLineEndings(text.replace(/"(\w+)":/g, '$1:') + '\n', lineEnding);
 }
 
 function strip(text) {
