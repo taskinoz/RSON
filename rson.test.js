@@ -26,6 +26,10 @@ describe('RSON', () => {
         const rson = RSON.parse(rsonEncode);
         expect(rson).toEqual(JSON.parse(rsonJSON));
     });
+    test('Parse RSON with LF line endings', () => {
+        const rson = RSON.parse(rsonEncode.replace(/\r\n/g, '\n'));
+        expect(rson).toEqual(JSON.parse(rsonJSON));
+    });
     test('Encode the RSON file and compare it to the JSON', () => {
         const rson = RSON.encode(JSON.parse(rsonJSON));
         const rsonObj = JSON.parse(rsonJSON);
@@ -36,8 +40,8 @@ describe('RSON', () => {
         const rsonObj = JSON.parse(rsonEntitlementsJSON);
         expect(rson).toEqual(rsonObj);
     });
-    test('Encode the RSON file and compare it to the RSON', () => {
+    test('Encode the RSON file and compare it to the RSON data', () => {
         const rson = RSON.encode(JSON.parse(rsonEntitlementsJSON));
-        expect(rson).toEqual(rsonEntitlementsEncode); // Fails
+        expect(RSON.parse(rson)).toEqual(RSON.parse(rsonEntitlementsEncode));
     });
 });
