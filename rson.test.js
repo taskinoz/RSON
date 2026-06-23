@@ -12,6 +12,10 @@ const rsonEnvironments = fs.readFileSync('./testRSON/environments.rson', 'utf8')
 const rsonMpMap = fs.readFileSync('./testRSON/mp_complex3.rson', 'utf8');
 const rsonSpMap = fs.readFileSync('./testRSON/sp_crashsite.rson', 'utf8');
 
+function normalizeLineEndings(text) {
+    return text.replace(/\r\n|\r/g, '\n');
+}
+
 describe('RSON', () => {
     test('Parse the RSON file and compare it to the JSON', () => {
         const rson = RSON.parse(rsonParse);
@@ -20,7 +24,7 @@ describe('RSON', () => {
     });
     test('Encode the RSON file and compare it to the RSON', () => {
         const rson = RSON.encode(JSON.parse(rsonJSON));
-        expect(rson).toEqual(rsonEncode);
+        expect(normalizeLineEndings(rson)).toEqual(normalizeLineEndings(rsonEncode));
     });
     test('Parse the RSON file and compare it to the RSON', () => {
         const rson = RSON.parse(rsonEncode);
@@ -33,7 +37,11 @@ describe('RSON', () => {
     test('Encode the RSON file and compare it to the JSON', () => {
         const rson = RSON.encode(JSON.parse(rsonJSON));
         const rsonObj = JSON.parse(rsonJSON);
-        expect(rson).toEqual(rsonEncode);
+        expect(normalizeLineEndings(rson)).toEqual(normalizeLineEndings(rsonEncode));
+    });
+    test('Encode RSON with LF line endings', () => {
+        const rson = RSON.encode(JSON.parse(rsonJSON), '\n');
+        expect(rson).toEqual(normalizeLineEndings(rsonEncode));
     });
     test('Parse the RSON file and compare it to the JSON', () => {
         const rson = RSON.parse(rsonEntitlements);
