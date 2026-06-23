@@ -4,7 +4,7 @@
   "description": "A parser for the Respawn Object Notation file format",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "bun test"
   },
   "keywords": [
     "rson",
